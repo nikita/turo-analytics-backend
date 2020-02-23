@@ -1,6 +1,7 @@
 const fs = require("fs");
-const rp = require("request-promise");
 const moment = require("moment");
+const qs = require("querystring");
+const rp = require("request-promise");
 
 // Initialize rp session
 const session = rp.defaults({
@@ -12,7 +13,7 @@ const session = rp.defaults({
     "User-Agent": "Turo/20.6.3 (iPhone; iOS 13.3; Scale/3.00)",
     "Accept-Language": "en-US;q=1",
     "X-Mobile-Carrier-Country": "us",
-    Authorization: "Bearer 8b69637a-7c06-4cb1-9a25-0afb07d0cdd5"
+    Authorization: "Bearer 1bbc87c0-0f5a-43d3-ab41-778f4e038a02"
   },
   gzip: true,
   json: true
@@ -23,9 +24,27 @@ let cars = [];
 
 const main = async () => {
   // Get all cars
+  const params = {
+    useDefaultMaximumDistance: 1,
+    businessClass: 0,
+    superDeluxeClass: 0,
+    instantBook: 0,
+    sortType: "RELEVANCE",
+    deluxeClass: 0,
+    itemsPerPage: "200",
+    delivery: 0,
+    turoGo: 0,
+    international: 1,
+    locationType: "Airport",
+    airportCode: "LAX",
+    startDate: "04/14/2020",
+    startTime: "10:00",
+    endDate: "04/16/2020",
+    endTime: "10:00",
+    allStarHost: 0
+  };
   const response = await session.get({
-    uri:
-      "https://api.turo.com/api/search?useDefaultMaximumDistance=1&location=Seattle, WA, USA&businessClass=0&superDeluxeClass=0&instantBook=0&sortType=RELEVANCE&deluxeClass=0&latitude=47.6062095&endTime=10:00&itemsPerPage=200&endDate=04/16/2020&delivery=0&turoGo=0&placeId=ChIJVTPokywQkFQRmtVEaUZlJRA&longitude=-122.3320708&international=1&locationType=City&startDate=04/14/2020&startTime=10:00&allStarHost=0"
+    uri: `https://api.turo.com/api/search?${qs.encode(params)}`
   });
 
   // Loop through all cars
@@ -36,7 +55,7 @@ const main = async () => {
 
     const unavailabilityResponse = (
       await session.get({
-        uri: `https://api.turo.com/api/vehicle/unavailability?endDate=02%2F28%2F2021&vehicleId=${vehicleId}&startDate=02%2F01%2F2020`
+        uri: `https://api.turo.com/api/vehicle/unavailability?endDate=02/28/2021&vehicleId=${vehicleId}&startDate=02/01/2020`
       })
     ).unavailableIntervals;
 

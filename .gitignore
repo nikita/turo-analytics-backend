@@ -109,5 +109,5 @@ dist
 # Stores VSCode versions used for testing VSCode extensions
 .vscode-test
 
-# Our cars result
-cars.json
+# MacOS
+.DS_Store
