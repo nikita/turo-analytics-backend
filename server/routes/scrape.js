@@ -3,12 +3,13 @@ const router = express.Router();
 import Car from "../models/Car";
 import fs from "fs";
 import Request from "../../api/request";
-const API = new Request(
-  "us.reserve.unknownproxies.com:10000:unverified:8ONdTChr1Mad"
-);
 
 router.get("/start", async (req, res, next) => {
   try {
+    const API = new Request(
+      "us.reserve.unknownproxies.com:10000:unverified:8ONdTChr1Mad"
+    );
+
     let allResults = [];
     let allVehicleIds = [];
     let duplicateVehicles = 0;
@@ -25,6 +26,14 @@ router.get("/start", async (req, res, next) => {
 
       if (airportVehicles > 1000) {
         increments = increments / 2;
+      }
+
+      // Airport has no cars, lets skip it to not make pointless requests
+      if (airportVehicles < 1) {
+        console.log(
+          `Airport code ${airportCode} has no vehicles, skipping it...`
+        );
+        continue;
       }
 
       console.log(`Starting airport code ${airportCode}`);
