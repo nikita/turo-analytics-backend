@@ -1,14 +1,11 @@
 import express from "express";
 const router = express.Router();
 import Car from "../models/Car";
-import fs from "fs";
 import Request from "../../api/request";
 
 router.get("/start", async (req, res, next) => {
   try {
-    const API = new Request(
-      "us.reserve.unknownproxies.com:10000:unverified:8ONdTChr1Mad"
-    );
+    const API = new Request("localhost");
 
     let allResults = [];
     let allVehicleIds = [];
