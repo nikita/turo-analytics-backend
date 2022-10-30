@@ -1,9 +1,9 @@
-// Turo's app version (2/22/20)
-export const APP_VERSION = "20.6.3";
+// Turo's app version (10/30/22)
+export const APP_VERSION = "22.39.1";
 
-// Turo's app default bearer that is used to get an access token (2/22/20)
+// Turo's app default bearer that is used to get an access token (10/30/22)
 export const APP_DEFAULT_BEARER =
-  "aW9zLW5hdGl2ZTpFVlNmUXZKNkp6YmNSNi9KVXZpM1h6ZDEyNWpnc2Z5Nktya2NVOWlRMWVYeitUOFU=";
+  "YW5kcm9pZC1uYXRpdmU6U3MvK2hRUUZmMjEwcVczcFROQTlleUVRcy8vbk5acFFtL1QyNEhuTXNJQkZSRzlN";
 
 // Turo's google maps api key for autocomplete api
 export const GOOGLE_MAPS_API_KEY = "AIzaSyAzat9Sq7kZGTRTSZLLTeNzfSeRPKcSI3o";
